@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <photon-component name="Horizontal" :are="1" :width="300" :height="200" />
+    <photon-component name="Vertical" :bre="1" :width="300" :height="200" />
+    <photon-component name="Diagonal" :are="1 / Math.sqrt(2)" :bre="1 / Math.sqrt(2)" :width="300" :height="200" />
+    <photon-component name="Antidiagonal" :are="1 / Math.sqrt(2)" :bre="-1 / Math.sqrt(2)" :width="300" :height="200" />
+    <photon-component name="circularCW" :are="1 / Math.sqrt(2)" :bim="1 / Math.sqrt(2)" :width="300" :height="200" />
+    <photon-component name="circularCCW" :are="1 / Math.sqrt(2)" :bim="-1 / Math.sqrt(2)" :width="300" :height="200" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import PhotonComponent from "./components/Photon.vue";
 
 export default Vue.extend({
   name: "app",
   components: {
-    HelloWorld
+    PhotonComponent
   }
 });
 </script>
@@ -25,5 +29,8 @@ export default Vue.extend({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+html {
+  background-color: black;
 }
 </style>
