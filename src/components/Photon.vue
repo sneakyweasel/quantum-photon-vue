@@ -9,9 +9,9 @@
         :key="`electricPoint-${index}`"
         class="point electric"
         :cx="xScale(z)"
-        :cy="yScale(gaussianComplex(are, aim, z))"
-        :r="eScale(gaussianComplex(bre, bim, z))"
-        :style="{fill: eColor(gaussianComplex(bre, bim, z))}"
+        :cy="yScale(gaussianComplex(are, aim, z, k, sigma))"
+        :r="eScale(gaussianComplex(bre, bim, z, k, sigma))"
+        :style="{fill: eColor(gaussianComplex(bre, bim, z, k, sigma))}"
       />
     </g>
 
@@ -21,19 +21,30 @@
         :key="`magneticPoint-${index}`"
         class="point magnetic"
         :cx="xScale(z)"
-        :cy="yScale(gaussianComplex(bre, bim, z))"
-        :r="mScale(gaussianComplex(are, aim, z))"
-        :style="{fill: mColor(gaussianComplex(bre, bim, z))}"
+        :cy="yScale(gaussianComplex(bre, bim, z, k, sigma))"
+        :r="mScale(gaussianComplex(are, aim, z, k, sigma))"
+        :style="{fill: mColor(gaussianComplex(bre, bim, z, k, sigma))}"
       />
     </g>
 
     <g class="gaussian">
       <circle
         v-for="(z, index) in zs"
-        :key="`gaussianPoint-${index}`"
+        :key="`gaussianPointb-${index}`"
         class="point gaussian"
         :cx="xScale(z)"
         :cy="yScale(gaussian(z))"
+        :r="3"
+        :style="{fill: 'hsla(170, 20%, 30%, 0.3)'}"
+      />
+    </g>
+    <g class="gaussian">
+      <circle
+        v-for="(z, index) in zs"
+        :key="`gaussianPointt-${index}`"
+        class="point gaussian"
+        :cx="xScale(z)"
+        :cy="yScale(-gaussian(z))"
         :r="3"
         :style="{fill: 'hsla(170, 20%, 30%, 0.3)'}"
       />
@@ -60,19 +71,21 @@ export default {
   
   props: {
     name: {type: String, default: ""},
-    photon: {type: Array, default: () => ([0,0,0,0])},
     are: { type: Number, default: 0 },
     aim: { type: Number, default: 0 },
     bre: { type: Number, default: 0 },
     bim: { type: Number, default: 0 },
     width: { type: Number, default: 300 },
-    height: { type: Number, default: 300 },
-    margin: { type: Number, default: 20 }
+    height: { type: Number, default: 200 },
+    margin: { type: Number, default: 20 },
+    k: { type: Number, default: 20 },
+    sigma: { type: Number, default: 0.3 },
+    range: { type: Number, default: 0.01 },
   },
   
   data() {
     return {
-      zs: d3.range(-1, 1, 0.01),
+      zs: d3.range(-1, 1, this.range),
       xScale: d3
         .scaleLinear()
         .domain([-1, 1])

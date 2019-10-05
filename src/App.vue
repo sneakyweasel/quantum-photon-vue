@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <photon-component name="Horizontal" :are="1" :width="300" :height="200" />
-    <photon-component name="Vertical" :bre="1" :width="300" :height="200" />
-    <photon-component name="Diagonal" :are="1 / Math.sqrt(2)" :bre="1 / Math.sqrt(2)" :width="300" :height="200" />
-    <photon-component name="Antidiagonal" :are="1 / Math.sqrt(2)" :bre="-1 / Math.sqrt(2)" :width="300" :height="200" />
-    <photon-component name="circularCW" :are="1 / Math.sqrt(2)" :bim="1 / Math.sqrt(2)" :width="300" :height="200" />
-    <photon-component name="circularCCW" :are="1 / Math.sqrt(2)" :bim="-1 / Math.sqrt(2)" :width="300" :height="200" />
+    <photon-component name="Horizontal" :are="1" :k="20" :sigma="0.2" />
+    <photon-component name="Vertical" :bre="1" :k="20" :sigma="0.2" />
+    <photon-component name="Diagonal" :are="1 / Math.sqrt(2)" :bre="1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
+    <photon-component name="Antidiagonal" :are="1 / Math.sqrt(2)" :bre="-1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
+    <photon-component name="circularCW" :are="1 / Math.sqrt(2)" :bim="1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
+    <photon-component name="circularCCW" :are="1 / Math.sqrt(2)" :bim="-1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
   </div>
 </template>
 
