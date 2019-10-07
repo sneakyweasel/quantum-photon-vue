@@ -5,7 +5,7 @@
     <photon-component name="Diagonal" :are="1 / Math.sqrt(2)" :bre="1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
     <photon-component name="Antidiagonal" :are="1 / Math.sqrt(2)" :bre="-1 / Math.sqrt(2)" :k="20" :sigma="0.2" />
     <photon-component name="circularCW" :are="1 / Math.sqrt(2)" :bim="1 / Math.sqrt(2)" :k="20" :sigma="0.2" />-->
-    <photon-component
+    <!-- <photon-component
       name="circularCCW"
       :are="1 / Math.sqrt(2)"
       :aim="0"
@@ -19,8 +19,8 @@
       :displayElectric="this.displayElectric"
       :displayMagnetic="this.displayMagnetic"
       :displayGaussian="this.displayGaussian"
-    />
-    <photon-component
+    /> -->
+    <!-- <photon-component
       name="circularCCW"
       :are="-1 / Math.sqrt(2)"
       :aim="0"
@@ -34,7 +34,8 @@
       :displayElectric="this.displayElectric"
       :displayMagnetic="this.displayMagnetic"
       :displayGaussian="this.displayGaussian"
-    />
+    /> -->
+    <electron-component :phi="0.5" :theta="0.4" />
 
     <div id="inputs">
       <h3>Inputs</h3>
@@ -77,12 +78,14 @@
 <script lang="ts">
 import Vue from "vue";
 import PhotonComponent from "./components/Photon.vue";
+import ElectronComponent from "./components/Electron.vue";
 
 export default Vue.extend({
   name: "app",
 
   components: {
-    PhotonComponent
+    // PhotonComponent
+    ElectronComponent
   },
 
   data: () => {
