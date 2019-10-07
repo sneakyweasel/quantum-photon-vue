@@ -3,7 +3,7 @@
     <text v-once class="text" :x="this.width / 2" :y="this.height + 35" >
       {{ name }}
     </text>
-    <g class="electric">
+    <g class="electric" v-if="displayElectric">
       <circle
         v-for="(z, index) in zs"
         :key="`electricPoint-${index}`"
@@ -15,7 +15,7 @@
       />
     </g>
 
-    <g class="magnetic">
+    <g class="magnetic" v-if="displayMagnetic">
       <circle
         v-for="(z, index) in zs"
         :key="`magneticPoint-${index}`"
@@ -27,7 +27,7 @@
       />
     </g>
 
-    <g class="gaussian">
+    <g class="gaussian" v-if="displayGaussian">
       <circle
         v-for="(z, index) in zs"
         :key="`gaussianPointb-${index}`"
@@ -37,8 +37,6 @@
         :r="3"
         :style="{fill: 'hsla(170, 20%, 30%, 0.3)'}"
       />
-    </g>
-    <g class="gaussian">
       <circle
         v-for="(z, index) in zs"
         :key="`gaussianPointt-${index}`"
@@ -80,20 +78,22 @@ export default {
     margin: { type: Number, default: 20 },
     k: { type: Number, default: 20 },
     sigma: { type: Number, default: 0.3 },
-    range: { type: Number, default: 0.01 },
+    range: { type: Number, default: 0.001 },
+    displayMagnetic: { type: Boolean, default: true },
+    displayElectric: { type: Boolean, default: true },
+    displayGaussian: { type: Boolean, default: true }
   },
   
   data() {
     return {
-      zs: d3.range(-1, 1, this.range),
       xScale: d3
         .scaleLinear()
         .domain([-1, 1])
-        .range([0, this.width]),
+        .range([this.margin, this.width - this.margin]),
       yScale: d3
         .scaleLinear()
         .domain([-1, 1])
-        .range([0, this.height]),
+        .range([this.margin, this.height - this.margin]),
       mScale: d3
         .scaleLinear()
         .domain([-1, 1])
@@ -101,13 +101,16 @@ export default {
       eScale: d3
         .scaleLinear()
         .domain([-1, 1])
-        .range([3, 5]),
+        .range([2, 10]),
       eColor: d3.scaleSequential(d3.interpolateInferno).domain([-1, 1]),
       mColor: d3.scaleSequential(d3.interpolateViridis).domain([-1, 1]),
     };
   },
 
   computed: {
+      zs(): number[] {
+        return d3.range(-1, 1, this.range);
+      }
   },
 
   methods: {
